@@ -1,58 +1,106 @@
-# create-svelte
+# svelte-enhanced-transitions
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Enhance your [svelte](https://github.com/sveltejs/svelte) transitions.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-## Creating a project
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/svelte-enhanced-transitions)
 
-If you're seeing this, you've probably already done this step. Congrats!
+![npm](https://img.shields.io/npm/v/svelte-enhanced-transitions)
+
+![npm](https://img.shields.io/npm/dt/svelte-enhanced-transitions)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/thiagolino8/svelte-enhanced-transitions)
+
+## Contributing
+
+Contributions are always welcome!
+
+## Authors
+
+- [@thiagolino8](https://www.github.com/thiagolino8)
+
+## Installation
+
+Install svelte-enhanced-transitions with npm
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+  npm install svelte-enhanced-transitions@latest -D
 ```
 
-## Developing
+## Features
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+The svelte-enhanced-transitions package allows you to enable and disable svelte transitions and use css variables in parameters that accept css units
 
-```bash
-npm run dev
+## Usage/Examples
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+The package exports a high order function named `enhanceTransition` that adds to a transition the ability to receive an enabled parameter and the ability to use css variables in the parameters you indicate, the function receives the transition to be enhanced and the parameters that can receive css variables
+In addition, the package also exports the seven standard svelte transitions already enhanced
+
+### Buit-in transitions
+
+```svelte
+<script>
+	import { fade } from 'svelte-enhanced-transitions';
+
+	let show = false;
+	let enabled = true;
+</script>
+
+<button on:click={() => show = !show}>toggle show</button>
+<button on:click={() => show = !show}>toggle enabled</button>
+
+{#if show}
+  <p transition:fly={{ enabled, x: '--x', y: '--y' }}>fly</p>
+{/if}
+
+<style>
+	p {
+		--x: 100vw;
+		--y: 1000vh;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		p {
+			--x: 0vw;
+			--y: 0vh;
+		}
+	}
+</style>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+### Custom transitions
 
-## Building
+```svelte
+<script>
+ import { enhanceTransition } from 'svelte-enhanced-transitions';
 
-To build your library:
+ function customBlur(node, params) {
+	// your transition code
+ }
 
-```bash
-npm run package
-```
+ const enhancedCustomBlur = enhanceTransition(custom, ['amount']);
 
-To create a production version of your showcase app:
+ let show = false;
+ let enabled = true;
+</script>
 
-```bash
-npm run build
-```
+<button on:click={() => show = !show}>toggle show</button>
+<button on:click={() => show = !show}>toggle enabled</button>
 
-You can preview the production build with `npm run preview`.
+{#if show}
+ <p transition:enhancedCustomBlur={{ enabled, amount: '--amount' }}>slide</p>
+{/if}
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+<style>
+ p {
+	--amount: 10px;
+ }
 
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
+ @media (prefers-reduced-motion: reduce) {
+	p {
+		--amount: 0px;
+	}
+ }
+</style>
 ```
