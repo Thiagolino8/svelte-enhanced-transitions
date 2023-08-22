@@ -11,12 +11,13 @@ import {
 
 type WithOptions<T> = T & { enabled?: boolean };
 
-const getCssVars = (style: CSSStyleDeclaration, options: any, cssVarCompatibleKeys: string[]) => {
+const getCssVars = (style: CSSStyleDeclaration, options: Record<string, unknown>, cssVarCompatibleKeys: string[]) => {
 	cssVarCompatibleKeys.forEach((key) => {
-		if (options[key] && typeof options[key] === 'string') {
-			const cssVar = style.getPropertyValue(options[key]);
-			if (cssVar) {
-				options[key] = cssVar;
+		const cssVar = options[key];
+		if (cssVar && typeof cssVar === 'string') {
+			const cssVarValue = style.getPropertyValue(cssVar);
+			if (cssVarValue) {
+				options[key] = cssVarValue;
 			}
 		}
 	});
