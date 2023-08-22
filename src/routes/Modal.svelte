@@ -1,5 +1,9 @@
 <script lang="ts">
-	export let intro, outro, enabled;
+	import type { crossfade } from "$lib/index.js";
+
+	export let intro: ReturnType<typeof crossfade>[0]
+	export let outro: ReturnType<typeof crossfade>[1]
+	export let enabled: boolean;
 </script>
 
 <button on:click>
