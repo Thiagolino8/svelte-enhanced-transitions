@@ -41,10 +41,10 @@ In addition, the package also exports the seven standard svelte transitions alre
 
 ```svelte
 <script>
-	import { fade } from 'svelte-enhanced-transitions';
+  import { fade } from 'svelte-enhanced-transitions';
 
-	let show = false;
-	let enabled = true;
+  let show = false;
+  let enabled = true;
 </script>
 
 <button on:click={() => show = !show}>toggle show</button>
@@ -55,17 +55,17 @@ In addition, the package also exports the seven standard svelte transitions alre
 {/if}
 
 <style>
-	p {
-		--x: 100vw;
-		--y: 1000vh;
-	}
+  p {
+    --x: 100vw;
+    --y: 1000vh;
+  }
 
-	@media (prefers-reduced-motion: reduce) {
-		p {
-			--x: 0vw;
-			--y: 0vh;
-		}
-	}
+  @media (prefers-reduced-motion: reduce) {
+    p {
+      --x: 0vw;
+      --y: 0vh;
+    }
+  }
 </style>
 ```
 
@@ -76,7 +76,7 @@ In addition, the package also exports the seven standard svelte transitions alre
  import { enhanceTransition } from 'svelte-enhanced-transitions';
 
  function customBlur(node, params) {
-	// your transition code
+  // your transition code
  }
 
  const enhancedCustomBlur = enhanceTransition(custom, ['amount']);
@@ -94,13 +94,21 @@ In addition, the package also exports the seven standard svelte transitions alre
 
 <style>
  p {
-	--amount: 10px;
+  --amount: 10px;
  }
 
  @media (prefers-reduced-motion: reduce) {
-	p {
-		--amount: 0px;
-	}
+  p {
+    --amount: 0px;
+  }
  }
 </style>
 ```
+
+### Known issues
+
+- Transitions initiated using the transition: directive will have the same value for the enabled prop on input and output even if the value has changed between one and the other, this problem does not happen if you use the in: and out: directives separately
+
+### Live Demo
+
+You can check the live demo [here](https://svelte-enhanced-transitions.vercel.app/)

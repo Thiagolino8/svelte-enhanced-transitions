@@ -20,7 +20,7 @@
 <svelte:window bind:innerWidth={width} />
 
 <h3>Enhanced Transitions</h3>
-<p>Transitions will occur when window size is less than 800 pixels</p>
+<p>Transitions will occur when window width size is less than 800 pixels</p>
 <p>Fly and blur will behave differently when when window size is less than 600 pixels</p>
 <p>Current window width: {width}</p>
 
