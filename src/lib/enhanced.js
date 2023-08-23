@@ -43,7 +43,7 @@ const getCssVars = (style, options, cssVarCompatibleKeys) => {
  * @param {string[]} [cssVarCompatibleKeys] - CSS variable compatible keys.
  * @returns {(node: T, options: WithOptions<U>) => TransitionConfig | (() => TransitionConfig)} The enhanced transition function.
  */
-const enhanceTransition = (transitionFn, cssVarCompatibleKeys) => (node, options) => {
+export const enhanceTransition = (transitionFn, cssVarCompatibleKeys) => (node, options) => {
 	const { enabled = true } = options;
 	if (cssVarCompatibleKeys) getCssVars(getComputedStyle(node), options, cssVarCompatibleKeys);
 	const transition = enabled ? transitionFn(node, options) : null;
