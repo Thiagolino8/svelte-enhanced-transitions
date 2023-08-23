@@ -1,6 +1,6 @@
 {
 	"name": "svelte-enhanced-transitions",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"scripts": {
 		"version:patch": "pnpm version patch",
 		"version:minor": "pnpm version minor",
