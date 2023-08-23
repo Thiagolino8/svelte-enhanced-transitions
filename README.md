@@ -41,31 +41,31 @@ In addition, the package also exports the seven standard svelte transitions alre
 
 ```svelte
 <script>
-  import { fade } from 'svelte-enhanced-transitions';
+	import { fade } from 'svelte-enhanced-transitions';
 
-  let show = false;
-  let enabled = true;
+	let show = false;
+	let enabled = true;
 </script>
 
-<button on:click={() => show = !show}>toggle show</button>
-<button on:click={() => show = !show}>toggle enabled</button>
+<button on:click={() => (show = !show)}>toggle show</button>
+<button on:click={() => (show = !show)}>toggle enabled</button>
 
 {#if show}
-  <p transition:fly={{ enabled, x: '--x', y: '--y' }}>fly</p>
+	<p transition:fly={{ enabled, x: '--x', y: '--y' }}>fly</p>
 {/if}
 
 <style>
-  p {
-    --x: 100vw;
-    --y: 1000vh;
-  }
+	p {
+		--x: 100vw;
+		--y: 1000vh;
+	}
 
-  @media (prefers-reduced-motion: reduce) {
-    p {
-      --x: 0vw;
-      --y: 0vh;
-    }
-  }
+	@media (prefers-reduced-motion: reduce) {
+		p {
+			--x: 0vw;
+			--y: 0vh;
+		}
+	}
 </style>
 ```
 
@@ -73,35 +73,35 @@ In addition, the package also exports the seven standard svelte transitions alre
 
 ```svelte
 <script>
- import { enhanceTransition } from 'svelte-enhanced-transitions';
+	import { enhanceTransition } from 'svelte-enhanced-transitions';
 
- function customBlur(node, params) {
-  // your transition code
- }
+	function customBlur(node, params) {
+		// your transition code
+	}
 
- const enhancedCustomBlur = enhanceTransition(custom, ['amount']);
+	const enhancedCustomBlur = enhanceTransition(custom, ['amount']);
 
- let show = false;
- let enabled = true;
+	let show = false;
+	let enabled = true;
 </script>
 
-<button on:click={() => show = !show}>toggle show</button>
-<button on:click={() => show = !show}>toggle enabled</button>
+<button on:click={() => (show = !show)}>toggle show</button>
+<button on:click={() => (show = !show)}>toggle enabled</button>
 
 {#if show}
- <p transition:enhancedCustomBlur={{ enabled, amount: '--amount' }}>slide</p>
+	<p transition:enhancedCustomBlur={{ enabled, amount: '--amount' }}>slide</p>
 {/if}
 
 <style>
- p {
-  --amount: 10px;
- }
+	p {
+		--amount: 10px;
+	}
 
- @media (prefers-reduced-motion: reduce) {
-  p {
-    --amount: 0px;
-  }
- }
+	@media (prefers-reduced-motion: reduce) {
+		p {
+			--amount: 0px;
+		}
+	}
 </style>
 ```
 
