@@ -9,14 +9,14 @@ import {
 	type TransitionConfig
 } from 'svelte/transition';
 
-type WithOptions<T> = T & { enabled?: boolean };
+type WithOptions<T> = T & { enabled?: boolean | string };
 
 const getCssVars = (
 	style: CSSStyleDeclaration,
 	options: Record<string, unknown>,
 	cssVarCompatibleKeys: string[]
 ) => {
-	cssVarCompatibleKeys.forEach((key) => {
+	[...cssVarCompatibleKeys, 'enabled'].forEach((key) => {
 		const cssVar = options[key];
 		if (cssVar && typeof cssVar === 'string') {
 			const cssVarValue = style.getPropertyValue(cssVar);
@@ -32,7 +32,7 @@ export const enhanceTransition =
 		transitionFn: (node: T, options: U) => TransitionConfig | (() => TransitionConfig),
 		cssVarCompatibleKeys?: string[]
 	) =>
-	(node: T, options: WithOptions<U>) => {
+	(node: T, options: WithOptions<U> = { enabled: true } as WithOptions<U>) => {
 		const { enabled = true } = options;
 		if (cssVarCompatibleKeys) getCssVars(getComputedStyle(node), options, cssVarCompatibleKeys);
 		const transition = enabled ? transitionFn(node, options) : null;
