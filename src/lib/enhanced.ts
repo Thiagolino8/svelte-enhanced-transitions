@@ -14,9 +14,9 @@ type WithOptions<T> = T & { enabled?: boolean | string };
 const getCssVars = (
 	style: CSSStyleDeclaration,
 	options: Record<string, unknown>,
-	cssVarCompatibleKeys: string[]
+	cssVarCompatibleKeys?: string[]
 ) => {
-	[...cssVarCompatibleKeys, 'enabled'].forEach((key) => {
+	cssVarCompatibleKeys?.forEach((key) => {
 		const cssVar = options[key];
 		if (cssVar && typeof cssVar === 'string') {
 			const cssVarValue = style.getPropertyValue(cssVar);
@@ -25,6 +25,10 @@ const getCssVars = (
 			}
 		}
 	});
+	if (typeof options?.enabled === 'string' && options?.enabled.match(/--[\w-]+/g)) {
+		const cssVarValue = style.getPropertyValue(options.enabled);
+		options.enabled = cssVarValue;
+	}
 };
 
 export const enhanceTransition =
@@ -33,8 +37,8 @@ export const enhanceTransition =
 		cssVarCompatibleKeys?: string[]
 	) =>
 	(node: T, options: WithOptions<U> = { enabled: true } as WithOptions<U>) => {
+		getCssVars(getComputedStyle(node), options, cssVarCompatibleKeys);
 		const { enabled = true } = options;
-		if (cssVarCompatibleKeys) getCssVars(getComputedStyle(node), options, cssVarCompatibleKeys);
 		const transition = enabled ? transitionFn(node, options) : null;
 
 		if (!enabled || !transition) return { duration: 0 };
