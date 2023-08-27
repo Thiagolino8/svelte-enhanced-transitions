@@ -36,6 +36,7 @@ The svelte-enhanced-transitions package allows you to enable and disable svelte 
 
 The package exports a high order function named `enhanceTransition` that adds to a transition the ability to receive an enabled parameter and the ability to use css variables in the parameters you indicate, the function receives the transition to be enhanced and the parameters that can receive css variables
 In addition, the package also exports the seven standard svelte transitions already enhanced
+In addition to the properties that you can make explicit to accept css variables, the enabled property always accepts a css variable as a value
 
 ### Buit-in transitions
 
@@ -82,19 +83,21 @@ In addition, the package also exports the seven standard svelte transitions alre
 	const enhancedCustomBlur = enhanceTransition(custom, ['amount']);
 
 	let show = false;
-	let enabled = true;
 </script>
 
-<button on:click={() => (show = !show)}>toggle show</button>
-<button on:click={() => (show = !show)}>toggle enabled</button>
-
 {#if show}
-	<p transition:enhancedCustomBlur={{ enabled, amount: '--amount' }}>slide</p>
+	<p transition:enhancedCustomBlur={{ enabled: '--enabled', amount: '--amount' }}>slide</p>
 {/if}
 
 <style>
 	p {
 		--amount: 10px;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		:root {
+			--enabled: true;
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
