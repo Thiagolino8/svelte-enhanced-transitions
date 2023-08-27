@@ -1,6 +1,9 @@
 {
 	"name": "svelte-enhanced-transitions",
 	"version": "0.0.6",
+	"repository": "git+https://github.com/Thiagolino8/svelte-enhanced-transitions.git",
+	"homepage": "https://svelte-enhanced-transitions.vercel.app/",
+	"author": "Thiago Lino Gomes",
 	"scripts": {
 		"version:patch": "pnpm version patch",
 		"version:minor": "pnpm version minor",
@@ -43,13 +46,14 @@
 	"devDependencies": {
 		"@changesets/cli": "^2.26.2",
 		"@picocss/pico": "^1.5.10",
-		"@sveltejs/adapter-auto": "^2.1.0",
-		"@sveltejs/adapter-static": "^2.0.3",
+		"@sveltejs/adapter-vercel": "^3.0.3",
 		"@sveltejs/kit": "^1.23.0",
-		"@sveltejs/package": "^2.2.1",
+		"@sveltejs/package": "^2.2.2",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@typescript-eslint/parser": "^6.4.1",
-		"eslint": "^8.47.0",
+		"autoprefixer": "^10.4.15",
+		"cssnano": "^6.0.1",
+		"eslint": "^8.48.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.33.0",
 		"prettier": "^3.0.2",
@@ -58,7 +62,7 @@
 		"svelte": "^4.2.0",
 		"svelte-check": "^3.5.0",
 		"tslib": "^2.6.2",
-		"typescript": "^5.1.6",
+		"typescript": "^5.2.2",
 		"vite": "^4.4.9"
 	},
 	"svelte": "./dist/index.js",
