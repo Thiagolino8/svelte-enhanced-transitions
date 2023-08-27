@@ -9,7 +9,6 @@ const config = {
 		adapter: adapter({
 			runtime: 'edge'
 		}),
-		inlineStyleThreshold: 6000
 	}
 };
 
