@@ -35,7 +35,9 @@ The svelte-enhanced-transitions package allows you to enable and disable svelte 
 ## Usage/Examples
 
 The package exports a high order function named `enhanceTransition` that adds to a transition the ability to receive an enabled parameter and the ability to use css variables in the parameters you indicate, the function receives the transition to be enhanced and the parameters that can receive css variables
-In addition, the package also exports the seven standard svelte transitions already enhanced
+
+The package also exports the seven standard svelte transitions already enhanced
+
 In addition to the properties that you can make explicit to accept css variables, the enabled property always accepts a css variable as a value
 
 ### Buit-in transitions
