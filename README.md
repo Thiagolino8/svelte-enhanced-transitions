@@ -51,7 +51,7 @@ In addition to the properties that you can make explicit to accept css variables
 </script>
 
 <button on:click={() => (show = !show)}>toggle show</button>
-<button on:click={() => (show = !show)}>toggle enabled</button>
+<button on:click={() => (show = !enabled)}>toggle enabled</button>
 
 {#if show}
 	<p transition:fly={{ enabled, x: '--x', y: '--y' }}>fly</p>
