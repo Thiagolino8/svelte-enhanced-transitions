@@ -9,7 +9,12 @@
 	$: show = $page.url.searchParams.has('show');
 </script>
 
-<a data-sveltekit-replacestate href={show ? $page.url.pathname : '?show=true'} role="button">
+<a
+	data-sveltekit-replacestate
+	data-sveltekit-noscroll
+	href={show ? $page.url.pathname : '?show=true'}
+	role="button"
+>
 	{show ? 'Hide' : 'Show'}
 </a>
 {#if !modal}
@@ -17,6 +22,7 @@
 		href={$page.url.search ? `${$page.url.href}&modal=true` : '?modal=true'}
 		role="button"
 		data-sveltekit-replacestate
+		data-sveltekit-noscroll
 		transition:fade={{ enabled: '--enabled' }}
 	>
 		<span
@@ -65,12 +71,8 @@
 		blur
 	</p>
 	<p in:fade={{ enabled: '--enabled' }} out:fade={{ enabled: '--enabled' }}>fade</p>
-	<p in:scale={{ enabled: '--enabled' }} out:scale={{ enabled: '--enabled' }}>
-		scale
-	</p>
-	<p in:slide={{ enabled: '--enabled' }} out:slide={{ enabled: '--enabled' }}>
-		slide
-	</p>
+	<p in:scale={{ enabled: '--enabled' }} out:scale={{ enabled: '--enabled' }}>scale</p>
+	<p in:slide={{ enabled: '--enabled' }} out:slide={{ enabled: '--enabled' }}>slide</p>
 {/if}
 
 <style>

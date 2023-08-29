@@ -5,19 +5,26 @@
 
 	const [intro, outro] = getCrossfade();
 
-	const searchParams = new URLSearchParams($page.url.searchParams)
-	searchParams.delete('modal')
+	const searchParams = new URLSearchParams($page.url.searchParams);
+	searchParams.delete('modal');
 	const closeLink = searchParams.toString()
 		? `${$page.url.pathname}?${searchParams.toString()}`
 		: $page.url.pathname;
 </script>
 
 <dialog transition:fade={{ enabled: '--enabled' }} open>
-	<a href={closeLink} data-sveltekit-replacestate aria-label="Close" class="backdrop" />
+	<a
+		href={closeLink}
+		data-sveltekit-replacestate
+		data-sveltekit-noscroll
+		aria-label="Close"
+		class="backdrop"
+	/>
 	<article>
 		<header>
 			<a
 				data-sveltekit-replacestate
+				data-sveltekit-noscroll
 				role="button"
 				href={closeLink}
 				aria-label="Close"

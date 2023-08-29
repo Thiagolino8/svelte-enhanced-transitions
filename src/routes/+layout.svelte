@@ -21,6 +21,7 @@
 	import Modal from './Modal.svelte';
 	import Nav from './Nav.svelte';
 	import Transitions from './Transitions.svelte';
+	import Footer from './Footer.svelte';
 
 	export let data;
 
@@ -40,6 +41,7 @@
 		{/key}
 	</article>
 	<Transitions />
+	<Footer />
 </main>
 
 {#if modal}
@@ -62,6 +64,7 @@
 
 	:root {
 		overflow-y: scroll;
+		height: 125vh;
 		position: relative;
 		--x: 100vw;
 		--y: 0vh;
