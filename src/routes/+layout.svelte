@@ -30,6 +30,11 @@
 	$: modal = $page.url.searchParams.has('modal');
 </script>
 
+<svelte:head>
+	<title>Enhanced Transitions</title>
+	<meta name="description" content="Enhanced Transitions" />
+</svelte:head>
+
 <main class="container">
 	<Nav />
 	<article>

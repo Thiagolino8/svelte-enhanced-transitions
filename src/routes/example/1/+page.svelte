@@ -1,41 +1,57 @@
-<div id="page-1" />
-<h3>Window width conditional</h3>
-<p>Transitions will occur when window width size is less than 768 pixels</p>
-<p>Fly and blur will behave differently when when window size is less than 640 pixels</p>
-<bold>Current window width is</bold>
+<h3>State conditional</h3>
+<p>You can enable and disable the transitions toggling the state selecting the checkbox</p>
+<p>Fly and blur have 2 diferent sets of behaviors, you can toggle them with the radio inputs</p>
+
+<label>
+	<input type="checkbox" name="enabled" />
+	<span class="transitions-are">Transitions are</span>
+</label>
+
+<bold>Current css variables set:</bold>
+<fieldset>
+	<label>
+		<span>Set 1</span>
+		<input type="radio" name="css-var-set" value="1" checked />
+	</label>
+	<label>
+		<span>Set 2</span>
+		<input type="radio" name="css-var-set" value="2" />
+	</label>
+</fieldset>
 
 <style>
-	bold {
-		--width: ' >= 768px';
+	fieldset {
+		display: flex;
+		align-items: center;
 	}
 
-	@media (max-width: 768px) {
-		bold {
-			--width: ' < 768px and >= 640px';
-		}
+	:root:has(input[type='radio'][name='css-var-set']:checked[value='2']) {
+		--content: ' 2';
 	}
 
-	@media (max-width: 640px) {
-		bold {
-			--width: ' < 640px';
-		}
+	:root {
+		--content: ' 1';
 	}
 
 	bold::after {
-		content: var(--width);
+		content: var(--content);
 	}
 
-	@media (max-width: 768px) {
-		:root:has(#page-1) {
-			--enabled: 'enabled';
-		}
+	:root:has(input[type='checkbox'][name='enabled']:checked) {
+		--enabled: 'enabled';
 	}
 
-	@media (max-width: 640px) {
-		:root:has(#page-1) {
-			--x: 0vw;
-			--y: -100vh;
-			--amount: 4rem;
-		}
+	:root:has(input[type='checkbox'][name='enabled']:checked) label .transitions-are::after {
+		content: ' enabled';
+	}
+
+	.transitions-are::after {
+		content: ' disabled';
+	}
+
+	:root:has(input[type='radio'][name='css-var-set']:checked[value='2']) {
+		--x: 0vw;
+		--y: -100vh;
+		--amount: 4rem;
 	}
 </style>
