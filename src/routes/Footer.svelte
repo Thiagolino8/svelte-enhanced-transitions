@@ -10,7 +10,7 @@
 		bottom: 0;
 	}
 
-	@media (min-width: 480px) {
+	@media (min-width: 640px) {
 		nav {
 			display: none;
 		}
