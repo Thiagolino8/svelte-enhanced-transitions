@@ -21,7 +21,7 @@
 		"prepublishOnly": "bun run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+		"lint": "prettier --plugin-search-dir src --check . && eslint src",
 		"format": "prettier --plugin-search-dir . --write .",
 		"publish": "bun run build && changeset publish"
 	},
