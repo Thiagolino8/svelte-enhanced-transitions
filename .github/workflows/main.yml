@@ -14,4 +14,6 @@ jobs:
           version: latest
 
       - run: bun install
-      - run: bun run lint && bun run build && bun run publint
+      - run: bun run lint
+      - run: bun run build
+      - run: bun run publint
