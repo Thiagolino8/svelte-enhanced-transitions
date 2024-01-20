@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { fade } from '$lib/index.js';
-	import { getCrossfade } from './+layout.svelte';
-
-	const [intro, outro] = getCrossfade();
+	import { intro, outro } from './crossfade.js';
 
 	const searchParams = new URLSearchParams($page.url.searchParams);
 	searchParams.delete('modal');
@@ -56,16 +54,10 @@
 
 	article {
 		z-index: 1;
-	}
-	article {
 		overflow: visible;
 	}
 
-	p {
-		display: inline-block;
-	}
-
-	h2 {
+	p, h2 {
 		display: inline-block;
 	}
 </style>

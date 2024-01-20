@@ -1,20 +1,3 @@
-<script lang="ts" context="module">
-	import { crossfade, slide } from '$lib/index.js';
-	import { getContext, setContext } from 'svelte';
-
-	const createContext = <T,>(value: T) => {
-		const key = Symbol();
-		return [() => setContext(key, value), () => getContext<T>(key)];
-	};
-
-	const [intro, outro] = crossfade({
-		fallback: undefined
-	});
-	const [setCrossfade, getCrossfade] = createContext([intro, outro]);
-
-	export { getCrossfade };
-</script>
-
 <script lang="ts">
 	import { page } from '$app/stores';
 	import '@picocss/pico';
@@ -22,10 +5,9 @@
 	import Nav from './Nav.svelte';
 	import Transitions from './Transitions.svelte';
 	import Footer from './Footer.svelte';
+	import { slide } from 'svelte/transition';
 
 	export let data;
-
-	setCrossfade();
 
 	$: modal = $page.url.searchParams.has('modal');
 </script>

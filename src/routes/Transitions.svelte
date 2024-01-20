@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { blur, draw, fade, fly, scale, slide } from '$lib/index.js';
 	import { page } from '$app/stores';
-	import { getCrossfade } from './+layout.svelte';
-
-	const [intro, outro] = getCrossfade();
+	import { intro, outro } from './crossfade.js';
 
 	$: modal = $page.url.searchParams.has('modal');
 	$: show = $page.url.searchParams.has('show');

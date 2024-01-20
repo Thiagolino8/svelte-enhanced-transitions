@@ -9,40 +9,33 @@ import {
 	type TransitionConfig
 } from 'svelte/transition';
 
-type WithOptions<T> = T & { enabled?: boolean | string };
-
-const getCssVars = (
-	style: CSSStyleDeclaration,
-	options: Record<string, unknown>,
-	cssVarCompatibleKeys?: string[]
-) => {
-	cssVarCompatibleKeys?.forEach((key) => {
-		const cssVar = options[key];
-		if (cssVar && typeof cssVar === 'string') {
-			const cssVarValue = style.getPropertyValue(cssVar);
-			if (cssVarValue) {
-				options[key] = cssVarValue;
-			}
-		}
-	});
-	if (typeof options?.enabled === 'string' && options?.enabled.match(/--[\w-]+/g)) {
-		const cssVarValue = style.getPropertyValue(options.enabled);
-		options.enabled = cssVarValue;
-	}
-};
-
 export const enhanceTransition =
-	<T extends Element, U>(
-		transitionFn: (node: T, options: U) => TransitionConfig | (() => TransitionConfig),
-		cssVarCompatibleKeys?: string[]
+	<T extends Element, U, V extends TransitionConfig | (() => TransitionConfig)>
+		(
+		transitionFn: (node: T, options: U) => V,
+		cssVarCompatibleKeys?: (keyof NonNullable<U>)[]
 	) =>
-	(node: T, options: WithOptions<U> = { enabled: true } as WithOptions<U>) => {
-		getCssVars(getComputedStyle(node), options, cssVarCompatibleKeys);
+	(node: T, options = { enabled: true } as U & { enabled?: boolean | string }) => {
+		const style = getComputedStyle(node);
+		options = Object.fromEntries(
+			Object.entries(options).map(([key, option]) => {
+				if (
+					((cssVarCompatibleKeys && cssVarCompatibleKeys.some((v) => v === key)) ||
+						key === 'enabled') &&
+					typeof option === 'string' &&
+					option.match(/--[\w-]+/g)
+				) {
+					const cssVarValue = style.getPropertyValue(option);
+					return [key, cssVarValue];
+				}
+				return [key, option];
+			})
+		) as typeof options;
 		const { enabled = true } = options;
 		const transition = enabled ? transitionFn(node, options) : null;
 
 		if (!enabled || !transition) return { duration: 0 };
-		if (typeof transition === 'function') {
+		if (transition instanceof Function) {
 			return transition;
 		}
 		return transition;

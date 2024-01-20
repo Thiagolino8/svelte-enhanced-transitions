@@ -8,11 +8,11 @@
 	nav {
 		position: fixed;
 		bottom: 0;
-	}
 
-	@media (min-width: 640px) {
-		nav {
-			display: none;
+		@media (width > 640px) {
+			& {
+				display: none;
+			}
 		}
 	}
 </style>

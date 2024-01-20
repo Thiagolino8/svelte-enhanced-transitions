@@ -7,31 +7,25 @@
 <style>
 	bold {
 		--width: ' >= 768px';
+		&::after {
+			content: var(--width);
+		}
 	}
 
-	@media (max-width: 768px) {
+
+	@media (width < 768px) {
 		bold {
 			--width: ' < 768px and >= 640px';
 		}
-	}
-
-	@media (max-width: 640px) {
-		bold {
-			--width: ' < 640px';
-		}
-	}
-
-	bold::after {
-		content: var(--width);
-	}
-
-	@media (max-width: 768px) {
 		:root:has(#page-1) {
 			--enabled: 'enabled';
 		}
 	}
 
-	@media (max-width: 640px) {
+	@media (width < 640px) {
+		bold {
+			--width: ' < 640px';
+		}
 		:root:has(#page-1) {
 			--x: 0vw;
 			--y: -100vh;

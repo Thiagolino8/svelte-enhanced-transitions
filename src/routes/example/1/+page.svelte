@@ -25,33 +25,32 @@
 		align-items: center;
 	}
 
-	:root:has(input[type='radio'][name='css-var-set']:checked[value='2']) {
-		--content: ' 2';
-	}
-
 	:root {
-		--content: ' 1';
+		&:has(input[type='radio'][name='css-var-set'][value='1']:checked) {
+			--content: ' 1';
+		}
+
+		&:has(input[type='radio'][name='css-var-set'][value='2']:checked) {
+			--content: ' 2';
+			--x: 0vw;
+			--y: -100vh;
+			--amount: 4rem;
+		}
+
+		&:has(input[type='checkbox'][name='enabled']:checked) {
+			--enabled: true;
+
+			& label .transitions-are::after {
+				content: ' enabled';
+			}
+		}
 	}
 
 	bold::after {
 		content: var(--content);
 	}
 
-	:root:has(input[type='checkbox'][name='enabled']:checked) {
-		--enabled: 'enabled';
-	}
-
-	:root:has(input[type='checkbox'][name='enabled']:checked) label .transitions-are::after {
-		content: ' enabled';
-	}
-
 	.transitions-are::after {
 		content: ' disabled';
-	}
-
-	:root:has(input[type='radio'][name='css-var-set']:checked[value='2']) {
-		--x: 0vw;
-		--y: -100vh;
-		--amount: 4rem;
 	}
 </style>

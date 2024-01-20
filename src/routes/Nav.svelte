@@ -22,7 +22,7 @@
 </nav>
 
 <style>
-	@media (max-width: 640px) {
+	@media (width < 640px) {
 		nav :global(ul:first-child) {
 			display: none;
 		}
