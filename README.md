@@ -40,7 +40,7 @@ The package also exports the seven standard svelte transitions already enhanced
 
 In addition to the properties that you can make explicit to accept css variables, the enabled property always accepts a css variable as a value
 
-### Buit-in transitions
+### Built-in transitions
 
 ```svelte
 <script>
