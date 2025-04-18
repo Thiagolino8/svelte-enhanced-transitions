@@ -10,9 +10,7 @@
 		bottom: 0;
 
 		@media (width > 640px) {
-			& {
-				display: none;
-			}
+			display: none;
 		}
 	}
 </style>

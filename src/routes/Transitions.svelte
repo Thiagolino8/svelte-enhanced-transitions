@@ -1,23 +1,23 @@
 <script lang="ts">
 	import { blur, draw, fade, fly, scale, slide } from '$lib/index.js';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { intro, outro } from './crossfade.js';
 
-	$: modal = $page.url.searchParams.has('modal');
-	$: show = $page.url.searchParams.has('show');
+	const modal = $derived(page.url.searchParams.has('modal'));
+	const show = $derived(page.url.searchParams.has('show'));
 </script>
 
 <a
 	data-sveltekit-replacestate
 	data-sveltekit-noscroll
-	href={show ? $page.url.pathname : '?show=true'}
+	href={show ? page.url.pathname : '?show=true'}
 	role="button"
 >
 	{show ? 'Hide' : 'Show'}
 </a>
 {#if !modal}
 	<a
-		href={$page.url.search ? `${$page.url.href}&modal=true` : '?modal=true'}
+		href={page.url.search ? `${page.url.href}&modal=true` : '?modal=true'}
 		role="button"
 		data-sveltekit-replacestate
 		data-sveltekit-noscroll

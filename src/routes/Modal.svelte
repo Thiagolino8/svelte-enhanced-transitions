@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { fade } from '$lib/index.js';
 	import { intro, outro } from './crossfade.js';
 
-	const searchParams = new URLSearchParams($page.url.searchParams);
+	const searchParams = new URLSearchParams(page.url.searchParams);
 	searchParams.delete('modal');
 	const closeLink = searchParams.toString()
-		? `${$page.url.pathname}?${searchParams.toString()}`
-		: $page.url.pathname;
+		? `${page.url.pathname}?${searchParams.toString()}`
+		: page.url.pathname;
 </script>
 
 <dialog transition:fade={{ enabled: '--enabled' }} open>
@@ -17,7 +17,7 @@
 		data-sveltekit-noscroll
 		aria-label="Close"
 		class="backdrop"
-	/>
+	></a>
 	<article>
 		<header>
 			<a
@@ -27,7 +27,7 @@
 				href={closeLink}
 				aria-label="Close"
 				class="close"
-			/>
+			></a>
 			<h2
 				in:intro={{ enabled: '--enabled', key: 'crossfade' }}
 				out:outro={{ enabled: '--enabled', key: 'crossfade' }}
@@ -57,7 +57,8 @@
 		overflow: visible;
 	}
 
-	p, h2 {
+	p,
+	h2 {
 		display: inline-block;
 	}
 </style>

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Links from './Links.svelte';
 
-	const examples = ['/example/1', '/example/2'];
+	const examples = ['toggle', 'breakpoint', 'merge'];
 </script>
 
 <nav>
@@ -13,8 +13,11 @@
 	<ul>
 		{#each examples as example}
 			<li>
-				<a href={example} role={$page.url.pathname === example ? 'button' : undefined}>
-					{example.replaceAll('/', ' ').trim()}
+				<a
+					href="/example/{example}"
+					role={page.url.pathname === `/example/${example}` ? 'button' : undefined}
+				>
+					{example}
 				</a>
 			</li>
 		{/each}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import '@picocss/pico';
 	import Modal from './Modal.svelte';
 	import Nav from './Nav.svelte';
@@ -7,9 +7,9 @@
 	import Footer from './Footer.svelte';
 	import { slide } from 'svelte/transition';
 
-	export let data;
+	const { data, children } = $props();
 
-	$: modal = $page.url.searchParams.has('modal');
+	const modal = $derived(page.url.searchParams.has('modal'));
 </script>
 
 <svelte:head>
@@ -20,10 +20,12 @@
 <main class="container">
 	<Nav />
 	<article>
-		<bold>All transition state management in this demo works without javascript, with css variables</bold>
+		<bold
+			>All transition state management in this demo works without javascript, with css variables</bold
+		>
 		{#key data.pathname}
 			<div in:slide out:slide>
-				<slot />
+				{@render children?.()}
 			</div>
 		{/key}
 	</article>
@@ -36,10 +38,6 @@
 {/if}
 
 <style>
-	main {
-		overflow-x: hidden;
-	}
-
 	article {
 		display: grid;
 		grid: 1fr / 1fr;
@@ -56,21 +54,7 @@
 		--x: 100vw;
 		--y: 0vh;
 		--amount: 1rem;
-	}
-
-	:global(html) {
 		overflow-y: scroll;
-	}
-
-	:global(p) {
-		z-index: 1000;
-	}
-
-	:global(h1, h2, h3, p, bold) {
-		margin: 0;
-	}
-
-	:global(button) {
-		width: auto;
+		overflow-x: hidden;
 	}
 </style>

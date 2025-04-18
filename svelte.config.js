@@ -10,6 +10,10 @@ const config = {
 			runtime: 'edge'
 		}),
 		inlineStyleThreshold: 6000
+	},
+
+	compilerOptions: {
+		runes: true
 	}
 };
 

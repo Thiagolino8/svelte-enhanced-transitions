@@ -4,7 +4,7 @@
 
 <label>
 	<input type="checkbox" name="enabled" />
-	<span class="transitions-are">Transitions are</span>
+	<span>Transitions are</span>
 </label>
 
 <bold>Current css variables set:</bold>
@@ -24,33 +24,33 @@
 		display: flex;
 		align-items: center;
 	}
-
 	:root {
-		&:has(input[type='radio'][name='css-var-set'][value='1']:checked) {
-			--content: ' 1';
-		}
+		:global {
+			&:has(input[type='radio'][value='1']:checked) {
+				--content: ' 1';
+			}
 
-		&:has(input[type='radio'][name='css-var-set'][value='2']:checked) {
-			--content: ' 2';
-			--x: 0vw;
-			--y: -100vh;
-			--amount: 4rem;
-		}
-
-		&:has(input[type='checkbox'][name='enabled']:checked) {
-			--enabled: true;
-
-			& label .transitions-are::after {
-				content: ' enabled';
+			&:has(input[type='radio'][value='2']:checked) {
+				--content: ' 2';
+				--x: 0vw;
+				--y: -100vh;
+				--amount: 4rem;
+			}
+			label:has(input[type='checkbox']) {
+				span::after {
+					content: ' disabled';
+					@container style(--enabled: true) {
+						content: ' enabled';
+					}
+				}
+			}
+			&:has(input[type='checkbox']:checked) {
+				--enabled: true;
 			}
 		}
 	}
 
 	bold::after {
 		content: var(--content);
-	}
-
-	.transitions-are::after {
-		content: ' disabled';
 	}
 </style>

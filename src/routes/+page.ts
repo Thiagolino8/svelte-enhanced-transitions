@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = () => {
-	redirect(303, '/example/1');
+	redirect(303, '/example/toggle');
 };

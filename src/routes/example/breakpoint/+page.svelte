@@ -1,32 +1,21 @@
-<div id="page-1" />
 <h3>Window width conditional</h3>
 <p>Transitions will occur when window width size is less than 768 pixels</p>
 <p>Fly and blur will behave differently when when window size is less than 640 pixels</p>
 <bold>Current window width is</bold>
 
 <style>
-	bold {
-		--width: ' >= 768px';
-		&::after {
-			content: var(--width);
-		}
+	bold::after {
+		content: var(--width);
 	}
 
-
-	@media (width < 768px) {
-		bold {
+	:root:has(h3) {
+		--width: ' >= 768px';
+		@media (width < 768px) {
 			--width: ' < 768px and >= 640px';
-		}
-		:root:has(#page-1) {
 			--enabled: 'enabled';
 		}
-	}
-
-	@media (width < 640px) {
-		bold {
+		@media (width < 640px) {
 			--width: ' < 640px';
-		}
-		:root:has(#page-1) {
 			--x: 0vw;
 			--y: -100vh;
 			--amount: 4rem;
