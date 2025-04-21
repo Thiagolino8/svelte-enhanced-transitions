@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { fade } from '$lib/index.js';
+	import { on } from 'svelte/events';
 	import { intro, outro } from './crossfade.js';
 
 	const searchParams = new URLSearchParams(page.url.searchParams);
@@ -8,19 +9,26 @@
 	const closeLink = searchParams.toString()
 		? `${page.url.pathname}?${searchParams.toString()}`
 		: page.url.pathname;
+
+	let link: HTMLAnchorElement;
+
+	const open = (dialog: HTMLDialogElement) => {
+		dialog.showModal();
+		$effect(() =>
+			on(dialog, 'click', (event) => {
+				if (event.target === dialog) {
+					link.click();
+				}
+			})
+		);
+	};
 </script>
 
-<dialog transition:fade={{ enabled: '--enabled' }} open>
-	<a
-		href={closeLink}
-		data-sveltekit-replacestate
-		data-sveltekit-noscroll
-		aria-label="Close"
-		class="backdrop"
-	></a>
+<dialog use:open transition:fade={{ enabled: '--enabled' }}>
 	<article>
 		<header>
 			<a
+				bind:this={link}
 				data-sveltekit-replacestate
 				data-sveltekit-noscroll
 				role="button"
@@ -46,12 +54,6 @@
 </dialog>
 
 <style>
-	.backdrop {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-	}
-
 	article {
 		z-index: 1;
 		overflow: visible;

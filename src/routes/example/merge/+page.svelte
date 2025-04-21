@@ -4,7 +4,7 @@
 
 	const options = { fly: fly, blur: blur, fade: fade, scale: scale, slide: slide } as const;
 
-	let chosen = $state.raw<(typeof options)[keyof typeof options][]>([fade, slide]);
+	let chosen = $state.raw<(typeof options)[keyof typeof options][]>([blur, slide]);
 	let show = $state.raw(false);
 
 	const resultant = $derived(mergeTransitions(...chosen));
@@ -30,7 +30,7 @@
 
 <style>
 	:root:has(select) {
-		:global([data-sveltekit-replacestate]) {
+		:global([data-sveltekit-replacestate], bold) {
 			display: none;
 		}
 	}
